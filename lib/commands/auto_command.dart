@@ -53,9 +53,14 @@ class AutoCommand extends Command<void> {
             'Postman spec ID (required for openapi3 format, or set XSPECID in .env)',
       )
       ..addFlag(
-        'force',
+        'overwrite-dependencies',
         negatable: false,
-        help: 'Force overwrite existing files',
+        help: 'Check and ensure dependencies are up to date',
+      )
+      ..addFlag(
+        'overwrite-build',
+        negatable: false,
+        help: 'Overwrite existing build.yaml',
       )
       ..addFlag(
         'skip-setup',
@@ -80,7 +85,8 @@ class AutoCommand extends Command<void> {
     final collectionUid = results['collection-uid'] as String?;
     final format = results['format'] as String;
     final specId = results['spec-id'] as String?;
-    final force = results['force'] as bool;
+    final overwriteDependencies = results['overwrite-dependencies'] as bool;
+    final overwriteBuild = results['overwrite-build'] as bool;
     final skipSetup = results['skip-setup'] as bool;
     final deleteConflicting = results['delete-conflicting'] as bool;
 
@@ -109,12 +115,14 @@ class AutoCommand extends Command<void> {
         print('│  [1.1] Adding dependencies...');
         final depsAdded = await addRequiredDependencies(
           targetProjectPath: targetPath,
-          force: force,
+          force: overwriteDependencies,
         );
 
-        if (!depsAdded && !force) {
+        if (!depsAdded && !overwriteDependencies) {
           stderr.writeln('│');
-          stderr.writeln('└─ ✗ Failed: Use --force to add dependencies\n');
+          stderr.writeln(
+            '└─ ✗ Failed: Use --overwrite-dependencies to update dependencies\n',
+          );
           exit(1);
         }
 
@@ -124,12 +132,14 @@ class AutoCommand extends Command<void> {
           targetProjectPath: targetPath,
           inputFolder: specDir,
           outputDirectory: outputDir,
-          force: force,
+          force: overwriteBuild,
         );
 
         if (!buildCreated) {
           stderr.writeln('│');
-          stderr.writeln('└─ ✗ Failed to create build.yaml\n');
+          stderr.writeln(
+            '└─ ✗ Failed to create build.yaml (use --overwrite-build to force)\n',
+          );
           exit(1);
         }
 

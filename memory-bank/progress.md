@@ -42,7 +42,9 @@
 - [x] Help text and usage documentation
 - [x] Validation of required arguments
 - [x] Format selection (swagger2/openapi3)
-- [x] Optional flags (force, skip-setup, delete-conflicting)
+- [x] Split flags: overwrite-dependencies, overwrite-build
+- [x] Optional flags (skip-setup, delete-conflicting)
+- [x] Global installation support
 
 ### Postman Integration - DONE
 - [x] HTTP client with Postman API
@@ -90,12 +92,24 @@
 ## Known Issues
 None currently. All major functionality working.
 
+## GitOps Integration - DONE
+- [x] GitHub Actions workflow (postman-to-pvautoclient-gitops)
+- [x] Workflow dispatch trigger (manual + API)
+- [x] Automated tool installation from Git
+- [x] Dart package caching
+- [x] Tool version/branch selection
+- [x] Direct commit to main branch
+- [x] Date-based mirror branches (generated-YYYY-MM-DD)
+- [x] Duplicate branch handling (counter suffix)
+
 ## Lessons Learned
 1. **Postman API Complexity**: Collections endpoint returns native format, not Swagger
 2. **Conversion Service**: Postman provides conversion service at demo.postmansolutions.com
 3. **Field Names Matter**: swagger_dart_code_generator requires exact field names in build.yaml
 4. **Cache Issues**: .dart_tool must be deleted when build.yaml changes
 5. **Swagger 2.0 Preferred**: Direct Swagger 2.0 conversion more reliable than OpenAPI 3.0 adjustment
+6. **GitOps Benefits**: Automated generation + version control = reproducible builds
+7. **Split Flags**: Granular control better than single --force flag
 
 ## Blockers
 None.

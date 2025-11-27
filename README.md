@@ -39,8 +39,11 @@ pv_auto_client download-spec --output-path <path-to-project>
 ### Common Flags
 - `--target` / `-t` - Target project path
 - `--format` - Spec format: `swagger2` (default) or `openapi3`
-- `--force` - Overwrite existing files
+- `--overwrite-dependencies` - Update dependencies in pubspec.yaml
+- `--overwrite-build` - Overwrite existing build.yaml
+- `--delete-conflicting` - Delete conflicting outputs (default: true)
 - `--spec-file` / `-f` - Spec filename (default: `api_spec.json`)
+- `--skip-setup` - Skip dependency and build.yaml setup
 
 ### OpenAPI 3.0 Mode
 ```bash

@@ -29,12 +29,22 @@ Session 1 misunderstood this as a project that USES generated code. All incorrec
 6. ✅ Format selection (swagger2 default, openapi3 optional)
 7. ✅ Environment variable loading from target project
 8. ✅ Build runner orchestration
+9. ✅ Split flags: --overwrite-dependencies and --overwrite-build
+10. ✅ GitOps workflow with GitHub Actions integration
 
 ### Successfully Tested
 1. ✅ Full auto command workflow
 2. ✅ Swagger 2.0 conversion from Postman collection
 3. ✅ Code generation with swagger_dart_code_generator
 4. ✅ Generated Chopper client with all endpoints functional
+5. ✅ Global installation via dart pub global activate
+
+### GitOps Integration
+- ✅ GitHub Actions workflow for automated generation
+- ✅ Workflow dispatch trigger (manual and API)
+- ✅ Date-based branch mirroring (generated-YYYY-MM-DD)
+- ✅ Dart package caching for faster runs
+- ✅ Tool version selection (branch/tag)
 
 ### No Known Issues
 All major functionality working as designed.
